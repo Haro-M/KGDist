@@ -1,355 +1,264 @@
+<div align="center">
+    <br>
+    <img src="https://raw.githubusercontent.com/allenai/allennlp/master/docs/img/allennlp-logo-dark.png" width="400"/>
+    <p>
+    An Apache 2.0 NLP research library, built on PyTorch, for developing state-of-the-art deep learning models on a wide variety of linguistic tasks.
+    </p>
+    <hr/>
+</div>
+<p align="center">
+    <a href="https://github.com/allenai/allennlp/actions">
+        <img alt="Build" src="https://github.com/allenai/allennlp/workflows/Master/badge.svg?event=push&branch=master">
+    </a>
+    <a href="https://pypi.org/project/allennlp/">
+        <img alt="PyPI" src="https://img.shields.io/pypi/v/allennlp">
+    </a>
+    <a href="https://github.com/allenai/allennlp/blob/master/LICENSE">
+        <img alt="License" src="https://img.shields.io/github/license/allenai/allennlp.svg?color=blue&cachedrop">
+    </a>
+    <a href="https://codecov.io/gh/allenai/allennlp">
+        <img alt="Codecov" src="https://codecov.io/gh/allenai/allennlp/branch/master/graph/badge.svg">
+    </a>
+    <a href="https://optuna.org">
+        <img alt="Optuna" src="https://img.shields.io/badge/Optuna-integrated-blue">
+    </a>
+    <br/>
+</p>
 
-KnowBert
-========
+## Quick Links
 
-KnowBert is a general method to embed multiple knowledge bases into BERT.
-This repository contains pretrained models, evaluation and training scripts
-for KnowBert with Wikipedia and WordNet.
+- [Website](https://allennlp.org/)
+- [Guide](https://guide.allennlp.org/)
+- [Forum](https://discourse.allennlp.org)
+- [Documentation](https://docs.allennlp.org/) ( [latest](https://docs.allennlp.org/latest/) | [stable](https://docs.allennlp.org/stable/) | [master](https://docs.allennlp.org/master/) )
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Officially Supported Models](https://github.com/allenai/allennlp-models)
+    - [Pretrained Models](https://github.com/allenai/allennlp-models/blob/master/allennlp_models/pretrained.py)
+    - [Documentation](https://docs.allennlp.org/models/) ( [latest](https://docs.allennlp.org/models/latest/) | [stable](https://docs.allennlp.org/models/stable/) | [master](https://docs.allennlp.org/models/master/) )
+- [Continuous Build](https://github.com/allenai/allennlp/actions)
+- [Nightly Releases](https://pypi.org/project/allennlp/#history)
 
-Citation:
+## Getting Started Using the Library
+
+If you're interested in using AllenNLP for model development, we recommend you check out the
+[AllenNLP Guide](https://guide.allennlp.org).  When you're ready to start your project, we've
+created a couple of template repositories that you can use as a starting place:
+
+* If you want to use `allennlp train` and config files to specify experiments, use [this
+  template](https://github.com/allenai/allennlp-template-config-files). We recommend this approach.
+* If you'd prefer to use python code to configure your experiments and run your training loop, use
+  [this template](https://github.com/allenai/allennlp-template-python-script). There are a few
+  things that are currently a little harder in this setup (loading a saved model, and using
+  distributed training), but except for those its functionality is equivalent to the config files
+  setup.
+
+In addition, there are external tutorials:
+
+* [Hyperparameter optimization for AllenNLP using Optuna](https://medium.com/optuna/hyperparameter-optimization-for-allennlp-using-optuna-54b4bfecd78b)
+* [Training with multiple GPUs in AllenNLP](https://medium.com/ai2-blog/tutorial-how-to-train-with-multiple-gpus-in-allennlp-c4d7c17eb6d6)
+
+And others on the [AI2 AllenNLP blog](https://medium.com/ai2-blog/allennlp/home).
+
+## Package Overview
+
+<table>
+<tr>
+    <td><b> allennlp </b></td>
+    <td> an open-source NLP research library, built on PyTorch </td>
+</tr>
+<tr>
+    <td><b> allennlp.commands </b></td>
+    <td> functionality for a CLI and web service </td>
+</tr>
+<tr>
+    <td><b> allennlp.data </b></td>
+    <td> a data processing module for loading datasets and encoding strings as integers for representation in matrices </td>
+</tr>
+<tr>
+    <td><b> allennlp.models </b></td>
+    <td> a collection of state-of-the-art models </td>
+</tr>
+<tr>
+    <td><b> allennlp.modules </b></td>
+    <td> a collection of PyTorch modules for use with text </td>
+</tr>
+<tr>
+    <td><b> allennlp.nn </b></td>
+    <td> tensor utility functions, such as initializers and activation functions </td>
+</tr>
+<tr>
+    <td><b> allennlp.training </b></td>
+    <td> functionality for training models </td>
+</tr>
+</table>
+
+## Installation
+
+AllenNLP requires Python 3.6.1 or later. The preferred way to install AllenNLP is via `pip`.  Just run `pip install allennlp` in your Python environment and you're good to go!
+
+If you need pointers on setting up an appropriate Python environment or would like to install AllenNLP using a different method, see below.
+
+We support AllenNLP on Mac and Linux environments. We presently do not support Windows but are open to contributions.
+
+### Installing via pip
+
+#### Setting up a virtual environment
+
+[Conda](https://conda.io/) can be used set up a virtual environment with the
+version of Python required for AllenNLP.  If you already have a Python 3.6 or 3.7
+environment you want to use, you can skip to the 'installing via pip' section.
+
+1.  [Download and install Conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+2.  Create a Conda environment with Python 3.7:
+
+    ```
+    conda create -n allennlp python=3.7
+    ```
+
+3.  Activate the Conda environment. You will need to activate the Conda environment in each terminal in which you want to use AllenNLP:
+
+    ```
+    conda activate allennlp
+    ```
+
+#### Installing the library and dependencies
+
+Installing the library and dependencies is simple using `pip`.
+
+```bash
+pip install allennlp
+```
+
+*Looking for bleeding edge features? You can install nightly releases directly from [pypi](https://pypi.org/project/allennlp/#history)*
+
+AllenNLP installs a script when you install the python package, so you can run allennlp commands just by typing `allennlp` into a terminal.  For example, you can now test your installation with `allennlp test-install`.
+
+You may also want to install `allennlp-models`, which contains the NLP constructs to train and run our officially
+supported models, many of which are hosted at [https://demo.allennlp.org](https://demo.allennlp.org).
+
+```bash
+pip install allennlp-models
+```
+
+### Installing using Docker
+
+Docker provides a virtual machine with everything set up to run AllenNLP--
+whether you will leverage a GPU or just run on a CPU.  Docker provides more
+isolation and consistency, and also makes it easy to distribute your
+environment to a compute cluster.
+
+Once you have [installed Docker](https://docs.docker.com/engine/installation/)
+just run the following command to get an environment that will run on either the cpu or gpu.
+
+```bash
+mkdir -p $HOME/.allennlp/
+docker run --rm -v $HOME/.allennlp:/root/.allennlp allennlp/allennlp:latest
+```
+
+You can test the Docker environment with
+
+```bash
+docker run --rm -v $HOME/.allennlp:/root/.allennlp allennlp/allennlp:latest test-install 
+```
+
+### Installing from source
+
+You can also install AllenNLP by cloning our git repository:
+
+```bash
+git clone https://github.com/allenai/allennlp.git
+```
+
+Create a Python 3.7 virtual environment, and install AllenNLP in `editable` mode by running:
+
+```bash
+pip install --editable .
+pip install -r dev-requirements.txt
+```
+
+This will make `allennlp` available on your system but it will use the sources from the local clone
+you made of the source repository.
+
+You can test your installation with `allennlp test-install`.
+See [https://github.com/allenai/allennlp-models](https://github.com/allenai/allennlp-models)
+for instructions on installing `allennlp-models` from source.
+
+## Running AllenNLP
+
+Once you've installed AllenNLP, you can run the command-line interface
+with the `allennlp` command (whether you installed from `pip` or from source).
+`allennlp` has various subcommands such as `train`, `evaluate`, and `predict`.
+To see the full usage information, run `allennlp --help`.
+
+## Docker images
+
+AllenNLP releases Docker images to [Docker Hub](https://hub.docker.com/r/allennlp/) for each release.  For information on how to run these releases, see [Installing using Docker](#installing-using-docker).
+
+### Building a Docker image
+
+For various reasons you may need to create your own AllenNLP Docker image.
+The same image can be used either with a CPU or a GPU.
+
+First, you need to [install Docker](https://www.docker.com/get-started).
+Then you will need a wheel of allennlp in the `dist/` directory.
+You can either obtain a pre-built wheel from a PyPI release or build a new wheel from
+source.
+
+PyPI release wheels can be downloaded by going to https://pypi.org/project/allennlp/#history,
+clicking on the desired release, and then clicking "Download files" in the left sidebar.
+After downloading, make you sure you put the wheel in the `dist/` directory
+(which may not exist if you haven't built a wheel from source yet).
+
+To build a wheel from source, just run `python setup.py wheel`.
+
+*Before building the image, make sure you only have one wheel in the `dist/` directory.*
+
+Once you have your wheel, run `make docker-image`. By default this builds an image
+with the tag `allennlp/allennlp`. You can change this to anything you want
+by setting the `DOCKER_TAG` flag when you call `make`. For example,
+`make docker-image DOCKER_TAG=my-allennlp`.
+
+You should now be able to see this image listed by running `docker images allennlp`.
 
 ```
-@inproceedings{Peters2019KnowledgeEC,
-  author={Matthew E. Peters and Mark Neumann and Robert L Logan and Roy Schwartz and Vidur Joshi and Sameer Singh and Noah A. Smith},
-  title={Knowledge Enhanced Contextual Word Representations},
-  booktitle={EMNLP},
-  year={2019}
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+allennlp/allennlp   latest              b66aee6cb593        5 minutes ago       2.38GB
+```
+
+### Running the Docker image
+
+You can run the image with `docker run --rm -it allennlp/allennlp:latest`.  The `--rm` flag cleans up the image on exit and the `-it` flags make the session interactive so you can use the bash shell the Docker image starts.
+
+You can test your installation by running  `allennlp test-install`.
+
+## Issues
+
+Everyone is welcome to file issues with either feature requests, bug reports, or general questions.  As a small team with our own internal goals, we may ask for contributions if a prompt fix doesn't fit into our roadmap.  To keep things tidy we will often close issues we think are answered, but don't hesitate to follow up if further discussion is needed.
+
+## Contributions
+
+The AllenNLP team at AI2 (@allenai) welcomes contributions from the greater AllenNLP community, and, if you would like to get a change into the library, this is likely the fastest approach.  If you would like to contribute a larger feature, we recommend first creating an issue with a proposed design for discussion.  This will prevent you from spending significant time on an implementation which has a technical limitation someone could have pointed out early on.  Small contributions can be made directly in a pull request.
+
+Pull requests (PRs) must have one approving review and no requested changes before they are merged.  As AllenNLP is primarily driven by AI2 (@allenai) we reserve the right to reject or revert contributions that we don't think are good additions.
+
+## Citing
+
+If you use AllenNLP in your research, please cite [AllenNLP: A Deep Semantic Natural Language Processing Platform](https://www.semanticscholar.org/paper/AllenNLP%3A-A-Deep-Semantic-Natural-Language-Platform-Gardner-Grus/a5502187140cdd98d76ae711973dbcdaf1fef46d).
+
+```bibtex
+@inproceedings{Gardner2017AllenNLP,
+  title={AllenNLP: A Deep Semantic Natural Language Processing Platform},
+  author={Matt Gardner and Joel Grus and Mark Neumann and Oyvind Tafjord
+    and Pradeep Dasigi and Nelson F. Liu and Matthew Peters and
+    Michael Schmitz and Luke S. Zettlemoyer},
+  year={2017},
+  Eprint = {arXiv:1803.07640},
 }
 ```
 
-## Getting started
-
-```
-git clone git@github.com:allenai/kb.git
-cd kb
-conda create -n knowbert python=3.6.7
-source activate knowbert
-pip install torch==1.2.0
-pip install -r requirements.txt
-python -c "import nltk; nltk.download('wordnet')"
-python -m spacy download en_core_web_sm
-pip install --editable .
-```
-
-Then make sure the tests pass:
-
-```
-pytest -v tests
-```
-
-
-## Pretrained Models
-
-* [KnowBert-WordNet](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wordnet_model.tar.gz)
-* [KnowBert-Wiki](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wiki_model.tar.gz)
-* [KnowBert-W+W](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wiki_wordnet_model.tar.gz)
-
-## How to embed sentences or sentence pairs programmatically
-
-```python
-
-from kb.include_all import ModelArchiveFromParams
-from kb.knowbert_utils import KnowBertBatchifier
-from allennlp.common import Params
-
-import torch
-
-# a pretrained model, e.g. for Wordnet+Wikipedia
-archive_file = 'https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wiki_wordnet_model.tar.gz'
-
-# load model and batcher
-params = Params({"archive_file": archive_file})
-model = ModelArchiveFromParams.from_params(params=params)
-batcher = KnowBertBatchifier(archive_file)
-
-sentences = ["Paris is located in France.", "KnowBert is a knowledge enhanced BERT"]
-
-# batcher takes raw untokenized sentences
-# and yields batches of tensors needed to run KnowBert
-for batch in batcher.iter_batches(sentences, verbose=True):
-    # model_output['contextual_embeddings'] is (batch_size, seq_len, embed_dim) tensor of top layer activations
-    model_output = model(**batch)
-```
-
-## How to run intrinisic evaluation
-
-First download one of the pretrained models from the previous section.
-
-### Heldout perplexity (Table 1)
-
-Download the [heldout data](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/data/wikipedia_bookscorpus_knowbert_heldout.txt). Then run:
-
-```
-MODEL_ARCHIVE=..location of model
-HELDOUT_FILE=wikipedia_bookscorpus_knowbert_heldout.txt
-python bin/evaluate_perplexity.py -m $MODEL_ARCHIVE -e $HELDOUT_FILE
-```
-
-The heldout perplexity is key `exp(lm_loss_wgt)`.
-
-### Wikidata KG probe (Table 1)
-
-Run:
-
-```
-MODEL_ARCHIVE=..location of model
-
-mkdir -p kg_probe
-cd kg_probe
-curl https://allennlp.s3-us-west-2.amazonaws.com/knowbert/data/kg_probe.zip > kg_probe.zip
-unzip kg_probe.zip
-
-cd ..
-python bin/evaluate_mrr.py \
-    --model_archive $MODEL_ARCHIVE \
-    --datadir kg_probe \
-    --cuda_device 0
-```
-
-The results are in key `'mrr'`.
-
-
-### Word-sense disambiguation
-
-To evaluate the internal WordNet linker on the ALL task evaluation
-from Raganato et al. (2017) follow these steps (Table 2).  First download the [Java scorer](http://lcl.uniroma1.it/wsdeval/) and [evaluation file](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/wordnet/semeval2007_semeval2013_semeval2015_senseval2_senseval3_all.json).
-
-Then run this command to generate predictions from KnowBert:
-
-```
-EVALUATION_FILE=semeval2007_semeval2013_semeval2015_senseval2_senseval3_all.json
-KNOWBERT_PREDICTIONS=knowbert_wordnet_predicted.txt
-MODEL_ARCHIVE=..location of model
-
-python bin/evaluate_wsd_official.py \
-    --evaluation_file $EVALUATION_FILE \
-    --output_file $KNOWBERT_PREDICTIONS \
-    --model_archive $MODEL_ARCHIVE \
-    --cuda_device 0
-```
-
-To evaluate predictions, decompress the Java scorer, navigate to the directory `WSD_Evaluation_Framework/Evaluation_Datasets` and run
-
-```
-java Scorer ALL/ALL.gold.key.txt $KNOWBERT_PREDICTIONS
-```
-
-### AIDA Entity linking
-
-To reproduce the results in Table 3 for KnowBert-W+W:
-
-```
-# or aida_test.txt
-EVALUATION_FILE=aida_dev.txt
-MODEL_ARCHIVE=..location of model
-
-curl https://allennlp.s3-us-west-2.amazonaws.com/knowbert/wiki_entity_linking/$EVALUATION_FILE > $EVALUATION_FILE
-
-python bin/evaluate_wiki_linking.py \
-    --model_archive $MODEL_ARCHIVE \
-    --evaluation_file $EVALUATION_FILE \
-    --wiki_and_wordnet
-```
-
-Results are in key `wiki_el_f1`.
-
-
-## Fine tuning KnowBert for downstream tasks
-
-Fine tuning KnowBert is similar to fine tuning BERT for a downstream task.
-We provide configuration and model files for the following tasks:
-
-* Relation extraction: TACRED and SemEval 2010 Task 8
-* Entity typing (Choi et al 2018)
-* Binary sentence classification: Words-in-Context
-
-To reproduce our results for the following tasks, find the appropriate config
-file in `training_config/downstream/`, edit the location of the training and dev
-data files, then run (example provided for TACRED):
-
-```
-allennlp train --file-friendly-logging --include-package kb.include_all \
-        training_config/downstream/tacred.jsonnet -s OUTPUT_DIRECTORY
-```
-
-Similar to BERT, for some tasks performance can vary significantly with hyperparameter
-choices and the random seed.  We used the script `bin/run_hyperparameter_seeds.sh`
-to perform a small grid search over learning rate, number of epochs and the random seed,
-choosing the best model based on the validation set.
-
-### Evaluating fine tuned models
-
-Fine-tuned KnowBert-Wiki+Wordnet models are available.
-
-* [TACRED](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wiki_wordnet_tacred.tar.gz)
-* [SemEval2010 Task 8](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wiki_wordnet_semeval2010_task8.tar.gz)
-* [WiC](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wiki_wordnet_wic.tar.gz)
-* [Entity Typing](https://allennlp.s3-us-west-2.amazonaws.com/knowbert/models/knowbert_wiki_wordnet_entity_typing.tar.gz)
-
-To evaluate a model first download the model archive and run:
-
-```
-allennlp evaluate --include-package kb.include_all \
-    --cuda-device 0 \
-    model_archive_here \
-    dev_or_test_filename_here
-```
-
-#### TACRED
-
-To evaluate a model with the official scorer, run:
-
-```
-python bin/write_tacred_for_official_scorer.py \
-    --model_archive model_archive_here \
-    --evaluation_file tacred_dev_or_test.json \
-    --output_file knowbert_predictions_tacred_dev_or_test.txt
-
-python bin/tacred_scorer.py tacred_dev_or_test.gold knowbert_predictions_tacred_dev_or_test.txt
-```
-
-#### SemEval 2010 Task 8
-
-To evaluate a model with the official scorer, first download
-the [testing gold keys](https://github.com/teffland/Relation-Extraction/blob/master/SemEval2010_task8_all_data/test_keys.txt) and run:
-
-```
-curl https://allennlp.s3-us-west-2.amazonaws.com/knowbert/data/semeval2010_task8/test.json > semeval2010_task8_test.json
-
-python bin/write_semeval2010_task8_for_official_eval.py \
-    --model_archive model_archive_here \
-    --evaluation_file semeval2010_task8_test.json \
-    --output_file knowbert_predictions_semeval2010_task8_test.txt
-
-perl -w bin/semeval2010_task8_scorer-v1.2.pl knowbert_predictions_semeval2010_task8_test.txt semeval2010_task8_testing_keys.txt
-```
-
-#### WiC
-
-Use `bin/write_wic_for_codalab.py` to write a file for submission to the CodaLab evaluation server.
-
-
-
-## How to pretrain KnowBert
-
-Roughly speaking, the process to fine tune BERT into KnowBert is:
-
-1. Prepare your corpus.
-2. Prepare the knowledge bases (not necessary if you are using Wikipedia or WordNet as we have already prepared these).
-3. For each knowledge base:
-    1. Pretrain the entity linker while freezing everything else.
-    2. Fine tune all parameters (except entity embeddings).
-
-
-#### Prepare your corpus.
-1. Sentence tokenize your training corpus using spacy, and prepare input files for next-sentence-prediction sampling.  Each file contains one sentence per line with consecutive sentences on subsequent lines and blank lines separating documents.
-2. Run `bin/create_pretraining_data_for_bert.py` to group the sentences by length, do the NSP sampling, and write out files for training.
-3. Reserve one or more of the training files for heldout evaluation.
-
-#### Prepare the input knowledge bases.
-1. We have already prepared the knowledge bases for Wikipedia and WordNet.  The necessary files will be automatically downloaded as needed when running evaluations or fine tuning KnowBert.
-2. If you would like to add an additional knowledge source to KnowBert, these are roughly the steps to follow:
-
-    1. Compute entity embeddings for each entity in your knowledge base.
-    2. Write a candidate generator for the entity linkers.  Use the existing WordNet or Wikipedia generators as templates.
-
-3.  Our Wikipedia candidate dictionary list and embeddings were extracted from [End-to-End Neural Entity Linking, Kolitsas et al 2018](https://github.com/dalab/end2end_neural_el) via a manual process.
-
-4. Our WordNet candidate generator is rule based (see code).  The embeddings were computed via a multistep process that combines [TuckER](https://arxiv.org/abs/1901.09590) and [GenSen](https://github.com/Maluuba/gensen) embeddings.  The prepared files contain everything needed to run KnowBert and include:
-
-    1. `entities.jsonl` - metadata about WordNet synsets.
-    2. `wordnet_synsets_mask_null_vocab.txt` and `wordnet_synsets_mask_null_vocab_embeddings_tucker_gensen.hdf5` - vocabulary file and embedding file for WordNet synsets.
-    3. `semcor_and_wordnet_examples.json` annotated training data combining SemCor and WordNet examples for supervising the WordNet linker.
-
-5. If you would like to generate these files yourself from scratch, follow these steps.
-
-   1. Extract the WordNet metadata and relationship graph.
-        ```
-        python bin/extract_wordnet.py --extract_graph --entity_file $WORKDIR/entities.jsonl --relationship_file $WORKDIR/relations.txt
-        ```
-    2. Download the [Words-in-Context dataset](https://pilehvar.github.io/wic/) to exclude from the extracted WordNet example usages.
-        ```
-        WORKDIR=.
-        cd $WORKDIR
-        wget https://pilehvar.github.io/wic/package/WiC_dataset.zip
-        unzip WiC_dataset.zip
-        ```
-    2. Download the [word sense diambiguation data](http://lcl.uniroma1.it/wsdeval/):
-        ```
-        cd $WORKDIR
-        wget http://lcl.uniroma1.it/wsdeval/data/WSD_Evaluation_Framework.zip
-        unzip WSD_Evaluation_Framework.zip
-        ```
-    2. Convert the WSD data from XML to jsonl, and concatenate all evaluation files for easy evaluation:
-        ```
-        mkdir $WORKDIR/wsd_jsonl
-        python bin/preprocess_wsd.py --wsd_framework_root $WORKDIR/WSD_Evaluation_Framework  --outdir $WORKDIR/wsd_jsonl
-        cat $WORKDIR/wsd_jsonl/semeval* $WORKDIR/wsd_jsonl/senseval* > $WORKDIR/semeval2007_semeval2013_semeval2015_senseval2_senseval3.json
-        ```
-    2. Extract all the synset example usages from WordNet (after removing sentences from WiC heldout sets):
-        ```
-        python bin/extract_wordnet.py --extract_examples_wordnet --entity_file $WORKDIR/entities.jsonl --wic_root_dir $WORKDIR --wordnet_example_file $WORKDIR/wordnet_examples_remove_wic_devtest.json
-        ```
-    2. Combine WordNet examples and definitions with SemCor for training KnowBert:
-        ```
-        cat $WORKDIR/wordnet_examples_remove_wic_devtest.json $WORKDIR/wsd_jsonl/semcor.json > $WORKDIR/semcor_and_wordnet_examples.json
-        ```
-    3. Create training and test splits of the relationship graph.
-        ```
-        python bin/extract_wordnet.py --split_wordnet --relationship_file $WORKDIR/relations.txt --relationship_train_file $WORKDIR/relations_train99.txt --relationship_dev_file $WORKDIR/relations_dev01.txt
-        ```
-    4. Train TuckER embeddings on the extracted graph.  The configuration files uses relationship graph files on S3, although you can substitute them for the files generated in the previous step by modifying the configuration file.
-        ```
-        allennlp train -s $WORKDIR/wordnet_tucker --include-package kb.kg_embedding --file-friendly-logging training_config/wordnet_tucker.json
-        ```
-    5. Generate a vocabulary file useful for WordNet synsets with special tokens
-        ```
-        python bin/combine_wordnet_embeddings.py --generate_wordnet_synset_vocab --entity_file $WORKDIR/entities.jsonl --vocab_file $WORKDIR/wordnet_synsets_mask_null_vocab.txt
-        ```
-    6. Get the [GenSen](https://github.com/Maluuba/gensen) embeddings from each synset definition.  First install the code from this link.  Then run
-        ```
-        python bin/combine_wordnet_embeddings.py --generate_gensen_embeddings --entity_file $WORKDIR/entities.jsonl --vocab_file $WORKDIR/wordnet_synsets_mask_null_vocab.txt --gensen_file $WORKDIR/gensen_synsets.hdf5
-        ```
-    7. Extract the TuckER embeddings for the synsets from the trained model
-        ```
-        python bin/combine_wordnet_embeddings.py --extract_tucker --tucker_archive_file $WORKDIR/wordnet_tucker/model.tar.gz --vocab_file $WORKDIR/wordnet_synsets_mask_null_vocab.txt --tucker_hdf5_file $WORKDIR/tucker_embeddings.hdf5
-        ```
-    8. Finally combine the TuckER and GenSen embeddings into one file
-        ```
-        python bin/combine_wordnet_embeddings.py --combine_tucker_gensen --tucker_hdf5_file $WORKDIR/tucker_embeddings.hdf5 --gensen_file $WORKDIR/gensen_synsets.hdf5 --all_embeddings_file $WORKDIR/wordnet_synsets_mask_null_vocab_embeddings_tucker_gensen.hdf5
-        ```
-
-#### Pretraining the entity linkers
-
-This step pretrains the entity linker while freezing the rest of the network using only supervised data.
-
-Config files are in `training_config/pretraining/knowbert_wiki_linker.jsonnet` and `training_config/pretraining/knowbert_wordnet_linker.jsonnet`.
-
-To train the Wikipedia linker for KnowBert-Wiki run:
-```
-allennlp train -s OUTPUT_DIRECTORY --file-friendly-logging --include-package kb.include_all training_config/pretraining/knowbert_wiki_linker.jsonnet
-```
-
-The command is similar for WordNet.
-
-#### Fine tuning BERT
-
-After pre-training the entity linkers from the step above, fine tune BERT.
-The pretrained models in our paper were trained on a single GPU with 24GB of RAM.  For multiple GPU training, change `cuda_device` to a list of device IDs.
-
-Config files are in `training_config/pretraining/knowbert_wiki.jsonnet` and
-`training_config/pretraining/knowbert_wordnet.jsonnet`.
-
-Before training, modify the following keys in the config file (or use `--overrides` flag to `allennlp train`):
-
-* `"language_modeling"`
-* `"model_archive"` to point to the `model.tar.gz` from the previous linker pretraining step.
-
-
-#### KnowBert Wordnet + Wiki
-
-First train KnowBert-Wiki.  Then pretrain the WordNet linker and finally fine tune the entire network.
-
-Config file to pretrain the WordNet linker from KnowBert-Wiki is in `training_config/pretraining/knowbert_wordnet_wiki_linker.jsonnet` and config to train KnowBert-W+W is in `training_config/pretraining/knowbert_wordnet_wiki.jsonnet`.
-
-
+## Team
+
+AllenNLP is an open-source project backed by [the Allen Institute for Artificial Intelligence (AI2)](https://allenai.org/).
+AI2 is a non-profit institute with the mission to contribute to humanity through high-impact AI research and engineering.
+To learn more about who specifically contributed to this codebase, see [our contributors](https://github.com/allenai/allennlp/graphs/contributors) page.
