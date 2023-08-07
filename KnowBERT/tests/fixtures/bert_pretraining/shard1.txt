@@ -1,2 +1,0 @@
-0	Big cats are cats .	The quickest dog .
-1	Second .	The hat is .
