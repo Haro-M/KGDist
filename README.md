@@ -1,5 +1,5 @@
 # KGDist: A Prompt-Based Distillation Attack against LMs Augmented with Knowledge Graphs
-This repository contains the PyTorch implementation of "A Prompt-Based Distillation Attack against LMs Augmented with Knowledge Graphs".
+This repository contains the PyTorch implementation of "A Prompt-Based Distillation Attack against LMs Augmented with Knowledge Graphs". Our paper is accepted by the RAID 2024.
 
 ## Introduction
 This code includes experiments for paper "A Prompt-Based Distillation Attack against LMs Augmented with Knowledge Graphs".
